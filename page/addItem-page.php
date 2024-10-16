@@ -3,7 +3,6 @@
 require "../config/config.php";
 session_start();
 
-
 $sql_supplier = "SELECT supplier_id, supplier_name FROM suppliers";
 $result_supplier = $db->query($sql_supplier);
 
@@ -15,6 +14,9 @@ $result_status = $db->query($sql_status);
 
 $sql_location = "SELECT location_id, location_name FROM location";
 $result_location = $db->query($sql_location);
+
+$sql_type = "SELECT type_id, type_name FROM types";
+$result_type = $db->query($sql_type);
 
 ?>
 
@@ -34,7 +36,7 @@ $result_location = $db->query($sql_location);
                 </h2>
             </div>
             <div class="item-form">
-                <form action="../proces/addItem.php" method="post">
+                <form action="../proces/addItem.php" method="POSY" enctype="multipart/form-data>
                     <div class="form-group">
                         <input type="text" name="itemName" id="itemName" placeholder="Enter item name" required>
                     </div>
@@ -82,6 +84,17 @@ $result_location = $db->query($sql_location);
                                 if ($result_location->num_rows > 0) {
                                     while ($row = $result_location->fetch_assoc()) {
                                         echo '<option value="' . $row['location_id'] . '">' . $row['location_name'] . '</option>';
+                                    }
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="itemType" id="itemType">
+                            <?php
+                                if ($result_type->num_rows > 0) {
+                                    while ($row = $result_type->fetch_assoc()) {
+                                        echo '<option value="' . $row['type_id'] . '">' . $row['type_name'] . '</option>';
                                     }
                                 }
                             ?>
