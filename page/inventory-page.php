@@ -19,7 +19,13 @@ session_start();
             <div class="content">
                 <p>Hello world</p>
                 <br>
-                <a href="addItem-page.php">Add Item</a>
+                <a href="addItem-page.php">Add Item</a> <br>
+                <a href="addCategory-page.php">Add Category</a> <br>
+                <a href="addSupplier-page.php">Add Supplier</a> <br>
+                <a href="addLocation-page.php">Add Location</a> <br>
+                <a href="addStatus-page.php">Add Status</a> <br>
+                <a href="addType-page.php">Add Types</a>
+
             </div>
         </div>
     </div>

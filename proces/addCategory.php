@@ -5,21 +5,32 @@ session_start();
 if (isset($_POST['submit'])) {
     $categoryName = $_POST['categoryName'];
 
-    $sql = "INSERT INTO categories (categoryName) VALUES ('$categoryName')";
-    $result = $db->query($sql);
+    $duplicate = mysqli_query($db, "SELECT category_name FROM categories WHERE category_name = '$categoryName'");
 
-    if ($result) {
+    if(mysqli_num_rows($duplicate) > 0) {
         echo "
         <script>
-            alert('Category added successfully');
-            window.location.href = '../page/category-page.php';
-        </script>
+            alert('Category already exist');
+            window.location.href = '../page/addCategory-page.php';
+        </script>;
         ";
     } else {
-        echo "
-        <script>
-            alert('Category not added');
-        </script>
-        ";
+        $sql = "INSERT INTO category (category_name) VALUES ('$categoryName')";
+        $result = $db->query($sql);
+
+        if($result) {
+            echo "
+            <script>
+                alert('Category added succesfully');
+                window.location.href = '../page/addCategory-page.php';
+            </script>;
+            ";
+        } else {
+            echo "
+            <script>
+                alert(Category not added);
+            </script>
+            ";
+        }
     }
 }

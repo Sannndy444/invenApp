@@ -3,6 +3,19 @@
 require "../config/config.php";
 session_start();
 
+
+$sql_supplier = "SELECT supplier_id, supplier_name FROM suppliers";
+$result_supplier = $db->query($sql_supplier);
+
+$sql_category = "SELECT category_id, category_name FROM categories";
+$result_categories = $db->query($sql_category);
+
+$sql_status = "SELECT status_id, status_name FROM status";
+$result_status = $db->query($sql_status);
+
+$sql_location = "SELECT location_id, location_name FROM location";
+$result_location = $db->query($sql_location);
+
 ?>
 
 <!DOCTYPE html>
@@ -30,22 +43,48 @@ session_start();
                     </div>
                     <div class="form-group">
                         <select name="itemSupplier" id="itemSupplier" required>
-                            <option value="">--- Chose Supplier ---</option>
+                            <?php
+                                if ($result_supplier->num_rows > 0) {
+                                    while ($row = $result_supplier->fetch_assoc()) {
+                                        echo '<option value="' . $row['supplier_id'] . '">' . $row['supplier_name'] . '</option>';
+                                    }
+                                } else {
+                                    echo '<option value=""> No options </option>';
+                                }
+                            ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <select name="itemCategory" id="itemCategory" required>
-                            <option value="">--- Chose Category ---</option>
+                            <?php
+                                if ($result_categories->num_rows > 0) {
+                                    while ($row = $result_categories->fetch_assoc()) {
+                                        echo '<option value="'. $row['category_id'] . '">' . $row['category_name'] . '</option>';
+                                    }
+                                }
+                            ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <select name="itemStatus" id="itemStatus" required>
-                            <option value="">--- Chose Status ---</option>
+                            <?php
+                                if ($result_status->num_rows > 0) {
+                                    while ($row = $result_status->fetch_assoc()) {
+                                        echo '<option value="' . $row['status_id'] . '">' . $row['status_name'] . '</option>';
+                                    }
+                                }
+                            ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <select name="itemLocation" id="itemLocation" required>
-                            <option value="">--- Chose Location ---</option>
+                            <?php
+                                if ($result_location->num_rows > 0) {
+                                    while ($row = $result_location->fetch_assoc()) {
+                                        echo '<option value="' . $row['location_id'] . '">' . $row['location_name'] . '</option>';
+                                    }
+                                }
+                            ?>
                         </select>
                     </div>
                     <div class="form-group">
