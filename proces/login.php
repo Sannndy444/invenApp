@@ -27,6 +27,7 @@ if (isset($_POST['submit'])) {
             echo "
             <script>
                 alert('Login Failed');
+                window.location.href = '../page/login-page.php';
             </script>
             ";
         }
@@ -34,6 +35,7 @@ if (isset($_POST['submit'])) {
         echo "
         <script>
             alert('Username or Email not found');
+            window.location.href = '../page/login-page.php';
         </script>
         ";
     }

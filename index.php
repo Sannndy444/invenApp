@@ -1,3 +1,13 @@
+<?php
+    require 'config/config.php';
+    session_start();
+
+    if (!isset($_SESSION['username'])) {
+        header("Location: page/login-page.php");
+        exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +16,6 @@
     <title>InvenApp</title>
 </head>
 <body>
-    <a href="page/login-page.php">Login</a>
+    
 </body>
 </html>
