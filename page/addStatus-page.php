@@ -6,6 +6,9 @@ if (!isset($_SESSION['username'])) {
     header("Location: login-page.php");
     exit;
 }
+
+$sql = "SELECT status_id, status_name FROM status";
+$result = mysqli_query($db, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +83,41 @@ if (!isset($_SESSION['username'])) {
                     <div class="form-group">
                         <button type="submit" name="submit" id="submit">Add</button>
                     </div>
+        </div>
+        <div class="showStatus">
+            <div class="title">
+                <h2>
+                    List Status
+                </h2>
+            </div>
+            <div class="contentStatus">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            if ($result->num_rows > 0) {
+                                $no = 1;
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<tr>";
+                                    echo "<td>" . $no . "</td>"; $no++;
+                                    echo "<td>" . htmlspecialchars($row['status_name']) . "</td>";
+                                    echo "<td>
+                                        <a href='editStatus-page.php?status_id=" . $row['status_id'] . "'>Edit</a> | 
+                                        <a href='../proces/deleteStatus.php?status_id=" . $row['status_id'] . "' onclick='return confirm(\"Are you sure you want to delete this item?\");'>Delete</a>
+                                        </td>";
+                                    echo "</tr>";
+                                }
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

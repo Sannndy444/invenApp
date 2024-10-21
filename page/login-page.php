@@ -2,9 +2,9 @@
 require '../config/config.php';
 session_start();
 
-if(!empty($_SESSION["user_id"])){
+if(!empty($_SESSION["username"])){
     // Jika pengguna sudah login, redirect ke halaman dashboard atau halaman lain yang diinginkan
-    header("Location: dashboard-page.php");
+    header("Location: home-page.php");
     exit;
 }
 ?>

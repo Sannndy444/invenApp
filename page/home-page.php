@@ -7,6 +7,8 @@
         header("Location: login-page.php");
         exit;
     }
+
+    $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +26,7 @@
         </div>
         <div class="home">
             <div class="title">
-                <h1>Welcome to InvenApp,<span><?php echo $_SESSION['username']; ?>!</span></h1>
+                <h1>Welcome to InvenApp,<span> <?php echo htmlspecialchars($username); ?>!</span></h1>
                 <p>This is the home page only accessible to logged-in users.</p>
             </div>
         </div>

@@ -6,6 +6,9 @@ if (!isset($_SESSION['username'])) {
     header("Location: login-page.php");
     exit;
 }
+
+$sql = "SELECT location_id, location_name FROM location";
+$result = mysqli_query($db, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +83,41 @@ if (!isset($_SESSION['username'])) {
                     <div class="form-group">
                         <button type="submit" name="submit" id="submit">Add</button>
                     </div>
+            </div>
+        </div>
+        <div class="showLocation">
+            <div class="title">
+                <h2>
+                    List Location
+                </h2>
+            </div>
+            <div class="contentLocation">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            if ($result->num_rows > 0) {
+                                $no = 1;
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<tr>";
+                                    echo "<td>" . $no . "</td>"; $no++;
+                                    echo "<td>" . htmlspecialchars($row['location_name']) . "</td>";
+                                    echo "<td>
+                                        <a href='editLocation-page.php?location_id=" . $row['location_id'] . "'>Edit</a> | 
+                                        <a href='../proces/deleteLocation.php?location_id=" . $row['location_id'] . "' onclick='return confirm(\"Are you sure you want to delete this item?\");'>Delete</a>
+                                        </td>";
+                                    echo "</tr>";
+                                }
+                            }
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

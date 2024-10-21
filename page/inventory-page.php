@@ -145,6 +145,7 @@ $result = $db->query($sql);
                 <table>
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Item Name</th>
                             <th>Quantity</th>
                             <th>Supplier</th>
@@ -160,9 +161,10 @@ $result = $db->query($sql);
                         <?php
                         // Mengecek apakah ada data yang diambil dari database
                         if ($result->num_rows > 0) {
-                            // Mengambil data barang satu per satu dan menampilkannya
-                            while($row = $result->fetch_assoc()) {
+                            $no = 1;
+                            while($row = mysqli_fetch_assoc($result)) {
                                 echo "<tr>";
+                                echo "<td>" . $no ."</td>"; $no++;
                                 echo "<td>" . htmlspecialchars($row['item_name']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['quantity']) . "</td>";
                                 echo "<td>" . htmlspecialchars($row['supplier_name']) . "</td>";
@@ -175,7 +177,7 @@ $result = $db->query($sql);
                                 // Tombol Edit dan Delete
                                 echo "<td>
                                         <a href='editItem-page.php?item_id=" . $row['item_id'] . "'>Edit</a> | 
-                                        <a href='deleteItem.php?item_id=" . $row['item_id'] . "' onclick='return confirm(\"Are you sure you want to delete this item?\");'>Delete</a>
+                                        <a href='../proces/deleteItem.php?item_id=" . $row['item_id'] . "' onclick='return confirm(\"Are you sure you want to delete this item?\");'>Delete</a>
                                         </td>";
                                 echo "</tr>";
                             }

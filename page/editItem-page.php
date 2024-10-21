@@ -45,6 +45,7 @@ $locationResult = $db->query($locationQuery);
 
 $typeQuery = "SELECT type_id, type_name FROM types";
 $typeResult = $db->query($typeQuery);
+
 ?>
 
 <!DOCTYPE html>

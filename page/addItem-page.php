@@ -22,7 +22,6 @@ $result_location = $db->query($sql_location);
 
 $sql_type = "SELECT type_id, type_name FROM types";
 $result_type = $db->query($sql_type);
-
 ?>
 
 <!DOCTYPE html>

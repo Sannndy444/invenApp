@@ -6,6 +6,9 @@ if (!isset($_SESSION['username'])) {
     header("Location: login-page.php");
     exit;
 }
+
+$sql = "SELECT category_id, category_name FROM categories";
+$result = mysqli_query($db, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -13,11 +16,11 @@ if (!isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Category</title>
+    <title>Category</title>
 
     <style>
         /* Mengatur tampilan container agar tetap besar */
-        .category {
+        .addCategory {
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
@@ -66,7 +69,7 @@ if (!isset($_SESSION['username'])) {
         <div class="navbar">
             <?php include 'navbar.php'; ?>
         </div>
-        <div class="category">
+        <div class="addCategory">
             <div class="title">
                 <h2>
                     Add Category
@@ -81,6 +84,41 @@ if (!isset($_SESSION['username'])) {
                         <button type="submit" name="submit" id="submit">Add</button>
                     </div>
                 </form>
+        </div>
+        <div class="showCategory">
+            <div class="title">
+                <h2>
+                    List Category
+                </h2>
+            </div>
+            <div class="contentCategory">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            if ($result->num_rows > 0) {
+                                $no = 1;
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<tr>";
+                                    echo "<td>" . $no . "</td>"; $no++;
+                                    echo "<td>" . htmlspecialchars($row['category_name']) . "</td>";
+                                    echo "<td>
+                                        <a href='editCategory-page.php?category_id=" . $row['category_id'] . "'>Edit</a> | 
+                                        <a href='../proces/deleteCategory.php?category_id=" . $row['category_id'] . "' onclick='return confirm(\"Are you sure you want to delete this item?\");'>Delete</a>
+                                        </td>";
+                                    echo "</tr>";
+                                }
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

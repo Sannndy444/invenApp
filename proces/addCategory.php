@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
         </script>;
         ";
     } else {
-        $sql = "INSERT INTO category (category_name) VALUES ('$categoryName')";
+        $sql = "INSERT INTO categories (category_name) VALUES ('$categoryName')";
         $result = $db->query($sql);
 
         if($result) {

@@ -115,11 +115,11 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-                <a href="addCategory-page.php">Add Category</a>
-                <a href="addLocation-page.php">Add Location</a>
-                <a href="addStatus-page.php">Add Status</a>
-                <a href="addSupplier-page.php">Add Supplier</a>
-                <a href="addType-page.php">Add Type</a>
+                <a href="addCategory-page.php">Category</a>
+                <a href="addLocation-page.php">Location</a>
+                <a href="addStatus-page.php">Status</a>
+                <a href="addSupplier-page.php">Supplier</a>
+                <a href="addType-page.php">Type</a>
             </div>
         </div>
         <div class="profile">

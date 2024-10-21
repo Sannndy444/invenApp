@@ -6,6 +6,9 @@ if (!isset($_SESSION['username'])) {
     header("Location: login-page.php");
     exit;
 }
+
+$sql = "SELECT supplier_id, supplier_name FROM suppliers";
+$result = mysqli_query($db, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +89,42 @@ if (!isset($_SESSION['username'])) {
                     <div class="form-group">
                         <button type="submit" name="submit" id="submit">Add</button>
                     </div>
+            </div>
+        </div>
+        <div class="showSupplier">
+            <div class="title">
+                <h2>
+                    List Supplier
+                </h2>
+            </div>
+            <div class="contentSupplier">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            if ($result->num_rows > 0) {
+                                $no = 1;
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<tr>";
+                                    echo "<td>" . $no . "</td>"; $no++;
+                                    echo "<td>" . htmlspecialchars($row['supplier_name']) . "</td>";
+                                    echo "<td>
+                                        <a href='editSupplier-page.php?supplier_id=" . $row['supplier_id'] . "'>Edit</a> | 
+                                        <a href='../proces/deleteSupplier.php?supplier_id=" . $row['supplier_id'] . "' onclick='return confirm(\"Are you sure you want to delete this item?\");'>Delete</a>
+                                        </td>";
+                                    echo "</tr>";
+                                }
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

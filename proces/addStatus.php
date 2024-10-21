@@ -3,7 +3,7 @@ require "../config/config.php";
 session_start();
 
 if (isset($_POST['submit'])) {
-    $categoryName = $_POST['statusName'];
+    $statusName = $_POST['statusName'];
 
     $duplicate = mysqli_query($db, "SELECT status_name FROM status WHERE status_name = '$statusName'"); 
 
