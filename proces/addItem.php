@@ -38,7 +38,7 @@ if(isset($_POST['submit'])) {
                 $target_file = $target_dir . basename($image);
 
                 if(move_uploaded_file($_FILES['img']['tmp_name'], $target_file)) {
-                    $query = "SELECT INTO items (item_name, quanity, supplier_id, category_id, status_id, location_id, type_id, image) VALUES ('$itemName', '$itemQuantity', '$itemSupplier', '$itemCategory', '$itemStatus', '$itemLocation', '$itemType', '$image')";
+                    $query = "INSERT INTO items (item_name, quantity, supplier_id, category_id, status_id, location_id, type_id, image) VALUES ('$itemName', '$itemQuantity', '$itemSupplier', '$itemCategory', '$itemStatus', '$itemLocation', '$itemType', '$image')";
 
                     if (mysqli_query($db, $query)) {
                         echo "Query berhasil dieksekusi";
